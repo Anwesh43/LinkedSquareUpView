@@ -25,3 +25,32 @@ val circleColor : Int = Color.parseColor("#f44336")
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
 fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.inverse(), maxScale(i, n)) * n
+
+fun Canvas.drawSquareUp(sc : Float, size : Float, h : Float, paint : Paint) {
+    val sc1 : Float = sc.divideScale(0, parts)
+    val sc2 : Float = sc.divideScale(1, parts)
+    val sc3 : Float = sc.divideScale(2, parts)
+    val y : Float = size + (h - size) * (sc1 - sc3)
+    save()
+    translate(size, size + (h - size) * (sc1 - sc3))
+    paint.color = squareColor
+    drawRect(RectF(-size, -size, size, size), paint)
+    paint.color = circleColor
+    drawCircle(0f, 0f, size * sc, paint)
+    restore()
+    paint.color = squareColor
+    drawLine(size, 0f, size, y - size, paint)
+}
+
+fun Canvas.drawSUPNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = w / (nodes + 1)
+    val size : Float = gap / sizeFactor
+    paint.strokeCap = Paint.Cap.ROUND
+    paint.strokeWidth = Math.min(w, h) / strokeFactor
+    save()
+    translate(gap * (i + 1), 0f)
+    drawSquareUp(scale, size, h / 2, paint)
+    restore()
+}
