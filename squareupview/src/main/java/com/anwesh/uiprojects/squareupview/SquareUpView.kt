@@ -37,7 +37,7 @@ fun Canvas.drawSquareUp(sc : Float, size : Float, h : Float, paint : Paint) {
     paint.color = squareColor
     drawRect(RectF(-size, -size, size, size), paint)
     paint.color = circleColor
-    drawCircle(0f, 0f, size * sc, paint)
+    drawCircle(0f, 0f, size * sc2, paint)
     restore()
     paint.color = squareColor
     drawLine(size, 0f, size, y - size, paint)
@@ -101,7 +101,7 @@ class SquareUpView(ctx : Context) : View(ctx) {
             if (animated) {
                 cb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(delay)
                     view.invalidate()
                 } catch(ex : Exception) {
 
