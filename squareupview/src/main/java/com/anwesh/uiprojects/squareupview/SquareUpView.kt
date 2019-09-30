@@ -210,4 +210,13 @@ class SquareUpView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : SquareUpView {
+            val view : SquareUpView = SquareUpView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
