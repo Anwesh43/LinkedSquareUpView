@@ -216,7 +216,7 @@ class SquareUpView(ctx : Context) : View(ctx) {
         fun create(activity : Activity) : SquareUpView {
             val view : SquareUpView = SquareUpView(activity)
             activity.setContentView(view)
-            return view 
+            return view
         }
     }
 }
