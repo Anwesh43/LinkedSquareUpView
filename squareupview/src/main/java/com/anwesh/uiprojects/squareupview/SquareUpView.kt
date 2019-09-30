@@ -21,6 +21,7 @@ val strokeFactor : Int = 90
 val sizeFactor : Float = 2.9f
 val squareColor : Int = Color.parseColor("#2196F3")
 val circleColor : Int = Color.parseColor("#f44336")
+val backColor : Int = Color.parseColor("#BDBDBD")
 
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
@@ -183,6 +184,28 @@ class SquareUpView(ctx : Context) : View(ctx) {
 
         fun startUpdating(cb : () -> Unit) {
             curr.startUpdating(cb)
+        }
+    }
+
+    data class Renderer(var view : SquareUpView) {
+
+        private val animator : Animator = Animator(view)
+        private val su : SquareUp = SquareUp(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            su.draw(canvas, paint)
+            animator.animate {
+                su.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            su.startUpdating {
+                animator.start()
+            }
         }
     }
 }
