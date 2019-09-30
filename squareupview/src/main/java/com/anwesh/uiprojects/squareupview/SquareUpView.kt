@@ -54,3 +54,21 @@ fun Canvas.drawSUPNode(i : Int, scale : Float, paint : Paint) {
     drawSquareUp(scale, size, h / 2, paint)
     restore()
 }
+
+class SquareUpView(ctx : Context) : View(ctx) {
+
+    private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    override fun onDraw(canvas : Canvas) {
+
+    }
+
+    override fun onTouchEvent(event : MotionEvent) : Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+
+            }
+        }
+        return true
+    }
+}
